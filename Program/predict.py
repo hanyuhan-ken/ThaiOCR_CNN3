@@ -6,13 +6,13 @@ from PIL import Image
 import numpy as np
 import cv2
 
-from Models.thaiocr_cnn3 import ThaiOCR_CNN3
+from Program.Models.thai_cnn3 import Thai_CNN3
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRAIN_DIR = os.path.join(BASE_DIR, "Dataset", "train")
 PREDICT_DIR = os.path.join(BASE_DIR, "Data Independen")
 OUTPUT_DIR = os.path.join(BASE_DIR, "Output")
-MODEL_PATH = os.path.join(BASE_DIR, "Results", "models", "thaiocr_best_model.pth")
+MODEL_PATH = os.path.join(BASE_DIR, "Results", "models", "thai_best_model.pth")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -42,7 +42,7 @@ print("====================================\n")
 
 print("[INFO] Memuat model...")
 
-model = ThaiOCR_CNN3(num_classes=num_classes).to(device)
+model = Thai_CNN3(num_classes=num_classes).to(device)
 state_dict = torch.load(MODEL_PATH, map_location=device)
 model.load_state_dict(state_dict, strict=True)
 model.eval()

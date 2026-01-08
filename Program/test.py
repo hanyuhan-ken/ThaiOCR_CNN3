@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sns
 import numpy as np
-from Models.thaiocr_cnn3 import ThaiOCR_CNN3
+from Program.Models.thai_cnn3 import Thai_CNN3
 from Utils.get_data import load_data_for_trainingtesting
 from matplotlib import font_manager, rcParams
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEST_DIR = os.path.join(BASE_DIR, "Dataset", "test")
 RESULTS_DIR = os.path.join(BASE_DIR, "Results")
-MODEL_PATH = os.path.join(RESULTS_DIR, "models", "thaiocr_best_model.pth")
+MODEL_PATH = os.path.join(RESULTS_DIR, "models", "thai_best_model.pth")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 os.makedirs(RESULTS_DIR, exist_ok=True)
@@ -31,7 +31,7 @@ _, test_loader, num_classes, class_names = load_data_for_trainingtesting(
 )
 print(f"[INFO] Loaded testing data: {len(test_loader.dataset)} images from '{TEST_DIR}'")
 
-model = ThaiOCR_CNN3(num_classes=num_classes).to(device)
+model = Thai_CNN3(num_classes=num_classes).to(device)
 
 model.load_state_dict(torch.load(MODEL_PATH, map_location=device, weights_only=True))
 model.eval()

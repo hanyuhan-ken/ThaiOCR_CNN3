@@ -2,10 +2,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class ThaiOCR_CNN3(nn.Module):
+class Thai_CNN3(nn.Module):
 
     def __init__(self, num_classes):
-        super(ThaiOCR_CNN3, self).__init__()
+        super(Thai_CNN3, self).__init__()
 
         # Block 1
         self.conv1 = nn.Sequential(

@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-from Models.thaiocr_cnn3 import ThaiOCR_CNN3
+from Program.Models.thai_cnn3 import Thai_CNN3
 from Utils.get_data import load_data_for_trainingtesting
 
 print("CUDA available:", torch.cuda.is_available())
@@ -24,7 +24,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 train_loader, _, num_classes, class_names = load_data_for_trainingtesting(train_dir=TRAIN_DIR, batch_size=batch_size)
 
-model = ThaiOCR_CNN3(num_classes=num_classes).to(device)
+model = Thai_CNN3(num_classes=num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -61,7 +61,7 @@ for epoch in range(1, epochs + 1):
 
     print(f"Epoch [{epoch}/{epochs}] - Loss: {avg_loss:.4f} | Training Accuracy: {accuracy*100:.2f}%")
 
-model_path = os.path.join(MODEL_DIR, "thaiocr_best_model.pth")
+model_path = os.path.join(MODEL_DIR, "thai_best_model.pth")
 torch.save(model.state_dict(), model_path)
 print(f"\n[SAVED] Model disimpan di: {model_path}")
 
